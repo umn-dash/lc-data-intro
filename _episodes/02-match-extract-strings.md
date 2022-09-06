@@ -242,20 +242,46 @@ What to consider:
 > 
 {: .callout}
 
-# Extracting a substring in Google Sheets using regex
+## Editing data on different platforms with regex
 
-> ## Extracting a substring in Google Sheets using regex
+### Extracting a substring in Google Sheets using regex
 > 1. Export and unzip the [2017 Public Library Survey](https://github.com/LibraryCarpentry/lc-data-intro/blob/gh-pages/files/PLS_FY17.zip) (originally from the IMLS data site) as a CSV file.
 > 2. Upload the CSV file to Google Sheets and open as a Google Sheet if it does not do this by default.
 > 3. Look in the `ADDRESS` column and notice that the values contain the latitude and longitude in parenthesis after the library address.
 > 4. Construct a regular expression to match and extract the latitude and longitude into a new column named 'latlong'. HINT: Look up the function `REGEXEXTRACT` in Google Sheets. That function expects the first argument to be a string (a cell in `ADDRESS` column) and a quoted regular expression in the second.
 >
->> ## Solution
+>> ### Solution
 > > This is one way to solve this challenge. You might have found others. Inside the cell you can use the below to extract the latitude and longitude into a single cell. You can then copy the formula down to the end of the column.
 >>~~~
 > > =REGEXEXTRACT(G2,"-?\d+\.\d+, -?\d+\.\d+")
 > >~~~
 > >{: .source}
 > > Latitude and longitude are in decimal degree format and can be positive or negative, so we start with an optional dash for negative values then use `\d+` for a one or more digit match followed by a period `\.`. Note we had to escape the period using `\`. After the period we look for one or more digits  `\d+` again followed by a literal comma `,`. We then have a literal space match followed by an optional dash `-` (there are few `0.0` latitude/longitudes that are probably errors, but we'd want to retain so we can deal with them). We then repeat our `\d+\.\d+` we used for the latitude match.
+> {: .solution}
+{: .challenge}
+
+
+### Editing data in OpenRefine using regex
+> 1. Download this short CSV with links to DOIs.
+> 2. Create a new project in OpenRefine using the CSV as your dataset. 
+> - Make sure you check off the box for "commas (CSV)" under the "Columns are separated by: option.
+> - Uncheck the box to "Parse next... 1 lines as column header" so that there is an undefined "Column 1" header.
+> 3. Write a regular expression to extract the DOI prefixes from these URLs into their own column?
+> - Tip: In the DOI URL ```http://dx.doi.org/10.1002/aelm.202200382``` the DOI prefix is ```10.1002```. The 10 indicates that the following ID is a DOI and the next number (.1002) represents a specific publication. 
+> - Note that publication IDs can vary in length. While most prefixes in this short dataset have four digits for the publication, at least one has five digits (e.g., 10.22454/...).
+> 4. You can use the Edit Column > Add column based on this column to extract the DOI prefixes you want into a new column. 
+> - Hint: value.match() is one nice way to find regex strings, but to do so using GREL you want to add your regular expression within the following: value.match(/.\*(regex-phrase-here).\*/).toString().
+>
+>> ### Solution
+> > There are several ways to solve this challenge, but the following command will find the DOI prefix and extract it into a new string in a column:
+>>~~~
+> > value.match(/.*(10\.[0-9]{4,9}).*/)[0].toString()
+> >~~~
+> >{: .source}
+> > You'll notice that in the expression above we added [0] to reference the first item in an array since the .match() command will return any found matches in a GREL array but we're only interested in one match in this case. Let's break down the full expression: 
+> > ```value.match(``` is a GREL command we can use to find matching substrings. 
+> > * ```/.*(REGEX)*./``` In OpenRefine we need to first enclose our regular expression in forward slashes, and we can add ```.*``` and ```*.``` at the beginning and end of our expression to note there could be any number of characters before and after our regular expression. We enclose our regular expression within another set of parentheses ```()```.
+> > ```10\.``` notes that we're looking for the number ten followed by a dot (we have to use the escape character before the period or else the dot will be read as a wildcard for any character.
+> > ```[0-9]{4,9}``` says we're looking for any digits that appear from between 4 to 9 times in a row. This would match for any numbers (with at least four points) between 0000 to 999999999. 
 > {: .solution}
 {: .challenge}
