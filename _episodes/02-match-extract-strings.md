@@ -263,7 +263,7 @@ What to consider:
 
 
 > ## Editing data in OpenRefine using regex
-> 1. Download this short CSV with links to DOIs.
+> 1. Download [this short CSV](https://umn-dash.github.io/lc-data-intro/data/dois.csv) with links to DOIs.
 > 2. Create a new project in OpenRefine using the CSV as your dataset. 
 > - Make sure you check off the box for "commas (CSV)" under the "Columns are separated by: option.
 > - Uncheck the box to "Parse next... 1 lines as column header" so that there is an undefined "Column 1" header.
