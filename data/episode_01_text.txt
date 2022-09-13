@@ -1,0 +1,27 @@
+Here is some sample text we can use to experiment. It includes numbers (e.g., 5, 36, 999), letters, punctuation and more. 
+
+My phone number is (515)-123-2345. 
+Another phone number is (415)-987-6543.
+
+An email address looks like name@organization.edu or pseudonym@gmail.com.
+Websites look like https://www.something.com but some Websites look like http://guides.library.edu
+
+Organize: A very simple use of a regular expression would be to locate the same word spelled two different ways. For example both organise and organize. But can we also match reorganise, reorganize, organises, organizes, organised, organized, etc?
+
+organizers
+organised protests
+organize
+
+ac
+abc
+abbbc
+
+1
+21
+321
+4321
+54321
+654321
+7654321
+87654321
+987654321
