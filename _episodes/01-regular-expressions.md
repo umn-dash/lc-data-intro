@@ -35,6 +35,10 @@ Since regular expressions defines some ASCII characters as "metacharacters" that
 
 A very simple use of a regular expression would be to locate the same word spelled two different ways. For example the regular expression `organi[sz]e` matches both `organise` and `organize`. But because it locates all matches for the pattern in the file, not just for that word, it would also match `reorganise`, `reorganize`, `organises`, `organizes`, `organised`, `organized`, etc.
 
+To visualize the essential building blocks of regular expressions, we'll use the [regex101.com](https://regex101.com/) website. 
+- First, let's copy the text from this Etherpad at: https://pad.carpentries.org/2022-09-12-minitex-online
+- Go to [regex101.com](https://regex101.com/) and paste the text into the TEST STRING box. 
+
 ### Learning common regex metacharacters
 Square brackets can be used to define a list or range of characters to be found. So:
 
