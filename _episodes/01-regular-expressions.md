@@ -190,34 +190,6 @@ When you finish, split your team into two groups and write each other some tests
 
 Then test each other on the answers. If you want to check your logic use [regex101](https://regex101.com/), [myregexp](http://myregexp.com/), [regex pal](http://www.regexpal.com/) or [regexper.com](http://regexper.com/): the first three help you see what text your regular expression will match, the latter visualises the workflow of a regular expression.
 
-> ## Using square brackets
-> What will the regular expression `Fr[ea]nc[eh]` match?
->
-> > ## Solution
-> > ~~~
-> > French
-> > France
-> > Frence
-> > Franch
-> > ~~~
-> > Note that the way this regular expression is constructed, it will match misspellings such as `Franch` and `Frence`. Lacking an "anchor" such as `^` or `\b`, this will also find strings where there are characters to either side of the regular expression, such as `in French`, `France's`, `French-fried`.
-> {: .solution}
-{: .challenge}
-
-> ## Using dollar signs
-> What will the regular expression `Fr[ea]nc[eh]$` match?
->
-> > ## Solution
-> > ~~~
-> > French
-> > France
-> > Frence
-> > Franch
-> > ~~~
-> > This will match the pattern only when it appears at the end of a line. It will also find strings with other characters coming _before_ the pattern, for example, `in French` or `faux-French`.
-> {: .solution}
-{: .challenge}
-
 > ## Introducing options
 > What would match the strings `French` and `France` that appear at the beginning of a line?
 >
@@ -229,22 +201,6 @@ Then test each other on the answers. If you want to check your logic use [regex1
 > {: .solution}
 {: .challenge}
 
-> ## Case insensitivity
-> How do you match the whole words `colour` and `color` (case insensitive)?
->
-> > ## Solutions
-> > ~~~
-> > \b[Cc]olou?r\b|\bCOLOU?R\b
-> > /colou?r/i
-> > ~~~
-> > In real life, you *should* only come across the case insensitive variations `colour`, `color`, `Colour`, `Color`, `COLOUR`, and `COLOR` (rather than, say, `coLour`). So based on what we know, the logical regular expression is `\b[Cc]olou?r\b|\bCOLOU?R\b`. 
-> > 
-> > An alternative more elegant option we've not discussed is to take advantage of the `/` delimiters and add an 'ignore case' flag.
-> > To use these flags, include `/` delimiters before and after the expression then letters after to raise each flag (where `i` is
-> > 'ignore case'): 
-> > so `/colou?r/i` will match all case insensitive variants of `colour` and `color`.
-> {: .solution}
-{: .challenge}
 
 > ## Word boundaries
 > How would you find the whole word `headrest` and or `head rest` but not <code>head&nbsp;&nbsp;rest</code> (that is, with two spaces between `head` and `rest`?
